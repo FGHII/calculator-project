@@ -118,3 +118,4 @@ buttons.forEach(function(button) {
 
 //testing ideas
 //press two operators in a row (same operator and different operators)
+//after pressing equals after a calculation, press a number after that - should it be concatenating to the current total?
