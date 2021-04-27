@@ -60,35 +60,61 @@ displayValue.registerListener(function(val) {
   display.innerText = displayValue.dvInternal;
 });
 
-//inputting numbers into display
+//inputting numbers and functions into display
 buttons = document.querySelectorAll(".button");
+//initializing values
 let currentDisplayNum = "0";
 let calculationArray = [];
+//adding event listener to each button
 buttons.forEach(function(button) {
   button.addEventListener("click", function(event) {
+    //number button functionality
     if (event.target.classList.contains("number")) {
+      //if it's a number, remove the default zero and concatenate it to the current display
+      //otherwise if you want to use the default zero as the first value you can
       if (currentDisplayNum == "0") {
         currentDisplayNum = '';
       };
     currentDisplayNum = currentDisplayNum.concat(event.target.innerText);
     displayValue.dv = currentDisplayNum; //updating display value variable that the listener is checking
+    //operator button functionality
   } else if (event.target.classList.contains("operator")) {
+    //push current displayed number to calc array
     calculationArray.push(parseFloat(currentDisplayNum));
+    console.log(calculationArray);
+    //if the calc array already has 3 values, calculate it first then push result and operator to array
+    if (calculationArray.length == 3) {
+      const result = operate(calculationArray[0], calculationArray[1], calculationArray[2])
+      calculationArray = [];
+      currentDisplayNum = "0";
+      calculationArray.push(result);
+      calculationArray.push(event.target.getAttribute("data-type"));
+      displayValue.dv = result; //display current running total/output
+      //if the array doesn't have 3 values yet, add just the operator (should just have 2 values now)
+    } else {
     calculationArray.push(event.target.getAttribute("data-type"));
-    currentDisplayNum = '';
-    displayValue.dv = event.target.innerText;
+    currentDisplayNum = "0";
+    displayValue.dv = event.target.innerText; //display current operator
+   }
+    //equals button functionality - push current value to array and send to operator
   } else if (event.target.classList.contains("equals")) {
-      if (currentDisplayNum !== '') {
-        calculationArray.push(parseFloat(currentDisplayNum));
-      }
+      calculationArray.push(parseFloat(currentDisplayNum));
       console.log(calculationArray);
-    const result = operate(calculationArray[0], calculationArray[1], calculationArray[2])
-    calculationArray = [];
-    displayValue.dv = result;
+    if (calculationArray.length == 3) {
+      const result = operate(calculationArray[0], calculationArray[1], calculationArray[2])
+      calculationArray = [];
+      calculationArray.push(result);
+      displayValue.dv = result;
+    }
+    //clear button functionality - initialize working variables
   } else if (event.target.classList.contains("clear")) {
     currentDisplayNum = "0";
-    calcluationArray = [];
+    calculationArray = [];
+    console.log(calculationArray);
     displayValue.dv = currentDisplayNum;
   }
-  })
-})
+});
+});
+
+//testing ideas
+//press two operators in a row (same operator and different operators)
