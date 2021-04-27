@@ -1,5 +1,11 @@
 h1 {
   text-align: center;
+
+}
+
+@font-face {
+  font-family: "digital-7";
+  src: url("digital-7-font/Digital7Monoitalic-8xKz.ttf")format("truetype");
 }
 
 .calculator-container {
@@ -10,22 +16,40 @@ h1 {
   margin: auto;
 }
 
+.display {
+  font-family: "digital-7", sans-serif;
+  font-size: 24px;
+  letter-spacing: 1px;
+  display: flex;
+  border: 1px solid black;
+  flex: 1 1 0;
+  margin-bottom: 20px;
+  justify-content: flex-end;
+  align-items: flex-end;
+
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+}
+
 .row {
   display: flex;
   flex-direction: row;
-  flex-grow: 1;
+  flex: 1 1 0;
   justify-content: center;
 }
 
 .button {
-  /* height: 20px;
-  width: 20px; */
   display: flex;
   border: 1px solid black;
   align-items: center;
   justify-content: center;
   padding: 1px;
   margin: 1px;
-  flex-grow: 1;
-
+  flex: 1 1 0;
+  font-weight: bold;
+  font-size: 24px;
 }
