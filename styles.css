@@ -1,8 +1,31 @@
-.button {
-  height: 20px;
-  width: 20px;
-  border: 1px solid black;
+h1 {
   text-align: center;
+}
+
+.calculator-container {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 300px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.button {
+  /* height: 20px;
+  width: 20px; */
+  display: flex;
+  border: 1px solid black;
+  align-items: center;
+  justify-content: center;
   padding: 1px;
   margin: 1px;
+  flex-grow: 1;
+
 }
