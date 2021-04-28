@@ -119,3 +119,5 @@ buttons.forEach(function(button) {
 //testing ideas
 //press two operators in a row (same operator and different operators)
 //after pressing equals after a calculation, press a number after that - should it be concatenating to the current total?
+//move calculation functions into switch cases?
+//calculate 8 / 4 = then press a number - it concatenates it to the current display
