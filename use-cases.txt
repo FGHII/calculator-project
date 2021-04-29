@@ -1,0 +1,5 @@
+num operator num
+  equals: push last num to array, calculate and display final result. Clear array and push result to 1st index
+    operator: push answer to 1st index of array and 
+    num: clear current display num if "0" and concatenate num to current display num
+  operator: push last num to array, display current pending result.  clear array and push results to 1st index, set current display num to "0"

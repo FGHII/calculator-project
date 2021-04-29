@@ -1,33 +1,17 @@
 //calculation functions
-function add(a, b) {
-  return a + b;
-};
-
-function subtract(a, b) {
-  return a - b;
-};
-
-function multiply(a, b) {
-  return a * b;
-};
-
-function divide(a, b) {
-  return a / b;
-};
-
 function operate(a, operator, b) {
   switch (operator) {
     case ("add"):
-      result = add(a, b);
+      result = a + b;
       break;
     case ("subtract"):
-      result = subtract(a, b);
+      result = a - b;
       break;
     case ("multiply"):
-      result = multiply(a, b);
+      result = a * b;
       break;
     case ("divide"):
-      result = divide(a, b);
+      result = a / b;
       break;
   }
   if (!result) {
@@ -79,9 +63,6 @@ buttons.forEach(function(button) {
     displayValue.dv = currentDisplayNum; //updating display value variable that the listener is checking
     //operator button functionality
   } else if (event.target.classList.contains("operator")) {
-    //push current displayed number to calc array
-    calculationArray.push(parseFloat(currentDisplayNum));
-    console.log(calculationArray);
     //if the calc array already has 3 values, calculate it first then push result and operator to array
     if (calculationArray.length == 3) {
       const result = operate(calculationArray[0], calculationArray[1], calculationArray[2])
@@ -89,10 +70,13 @@ buttons.forEach(function(button) {
       currentDisplayNum = "0";
       calculationArray.push(result);
       calculationArray.push(event.target.getAttribute("data-type"));
+      console.log(calculationArray);
       displayValue.dv = result; //display current running total/output
       //if the array doesn't have 3 values yet, add just the operator (should just have 2 values now)
     } else {
+    calculationArray.push(parseFloat(currentDisplayNum));
     calculationArray.push(event.target.getAttribute("data-type"));
+    console.log(calculationArray);
     currentDisplayNum = "0";
     displayValue.dv = event.target.innerText; //display current operator
    }
@@ -101,10 +85,9 @@ buttons.forEach(function(button) {
       calculationArray.push(parseFloat(currentDisplayNum));
       console.log(calculationArray);
     if (calculationArray.length == 3) {
-      const result = operate(calculationArray[0], calculationArray[1], calculationArray[2])
+      currentDisplayNum = operate(calculationArray[0], calculationArray[1], calculationArray[2])
       calculationArray = [];
-      calculationArray.push(result);
-      displayValue.dv = result;
+      displayValue.dv = currentDisplayNum;
     }
     //clear button functionality - initialize working variables
   } else if (event.target.classList.contains("clear")) {
@@ -117,7 +100,7 @@ buttons.forEach(function(button) {
 });
 
 //testing ideas
-//press two operators in a row (same operator and different operators)
-//after pressing equals after a calculation, press a number after that - should it be concatenating to the current total?
-//move calculation functions into switch cases?
+//Issue 1:  press two operators in a row (same operator and different operators)
+//RESOLVED - Issue 2:  after pressing equals after a calculation, press a number after that - should it be concatenating to the current total?
 //calculate 8 / 4 = then press a number - it concatenates it to the current display
+//RESOLVED - Issue 3:  8 + 8 = then do + 4......
