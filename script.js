@@ -1,5 +1,6 @@
 //calculation functions
 function operate(a, operator, b) {
+  result = undefined;
   switch (operator) {
     case ("add"):
       result = a + b;
@@ -14,11 +15,7 @@ function operate(a, operator, b) {
       result = a / b;
       break;
   }
-  if (!result) {
-    console.log("wrong operator")
-  } else {
     return result;
-  }
 };
 
 //initalizing display and setting up listener to update
@@ -47,14 +44,14 @@ displayValue.registerListener(function(val) {
 //inputting numbers and functions into display
 buttons = document.querySelectorAll(".button");
 //initializing values
-let currentDisplayNum = "0";
+let currentDisplayNum = "0"; //zero is default display number after first loadup or pressing clear
 let calculationArray = [];
 //adding event listener to each button
 buttons.forEach(function(button) {
   button.addEventListener("click", function(event) {
     //number button functionality
     if (event.target.classList.contains("number")) {
-      //if it's a number, remove the default zero and concatenate it to the current display
+      //if it's a non-zero number, remove the default zero and concatenate it to the current display
       //otherwise if you want to use the default zero as the first value you can
       if (currentDisplayNum == "0") {
         currentDisplayNum = '';
@@ -64,10 +61,12 @@ buttons.forEach(function(button) {
     //operator button functionality
   } else if (event.target.classList.contains("operator")) {
     //if the calc array already has 3 values, calculate it first then push result and operator to array
-    if (calculationArray.length == 3) {
+    if (calculationArray.length == 3 && typeof calculationArray[1] == 'string') {
       const result = operate(calculationArray[0], calculationArray[1], calculationArray[2])
       calculationArray = [];
-      currentDisplayNum = "0";
+      //clear displayed number while waiting for next number input.
+      //we're currently displaying the operator so we don't need the default display zero.
+      currentDisplayNum = '';
       calculationArray.push(result);
       calculationArray.push(event.target.getAttribute("data-type"));
       console.log(calculationArray);
@@ -77,19 +76,22 @@ buttons.forEach(function(button) {
     calculationArray.push(parseFloat(currentDisplayNum));
     calculationArray.push(event.target.getAttribute("data-type"));
     console.log(calculationArray);
-    currentDisplayNum = "0";
+    currentDisplayNum = ''; //clear displayed number while waiting for next number input
     displayValue.dv = event.target.innerText; //display current operator
    }
     //equals button functionality - push current value to array and send to operator
   } else if (event.target.classList.contains("equals")) {
+    //only push displayed number if an operator string is in the 2nd index position
+    if (typeof calculationArray[1] == 'string') {
       calculationArray.push(parseFloat(currentDisplayNum));
       console.log(calculationArray);
-    if (calculationArray.length == 3) {
+    }
+    if (calculationArray.length == 3 && typeof calculationArray[1] == 'string') {
       currentDisplayNum = operate(calculationArray[0], calculationArray[1], calculationArray[2])
       calculationArray = [];
       displayValue.dv = currentDisplayNum;
     }
-    //clear button functionality - initialize working variables
+    //clear button functionality - initialize working variables and display default zero
   } else if (event.target.classList.contains("clear")) {
     currentDisplayNum = "0";
     calculationArray = [];
@@ -99,8 +101,9 @@ buttons.forEach(function(button) {
 });
 });
 
-//testing ideas
+//Issues
 //Issue 1:  press two operators in a row (same operator and different operators)
-//RESOLVED - Issue 2:  after pressing equals after a calculation, press a number after that - should it be concatenating to the current total?
+//RESOLVED - Issue 4: calculate 8 x 6 = then press equals a few more times...it repeatedly adds the answer to the array
+//Issue 2:  after pressing equals after a calculation, press a number after that - should it be concatenating to the current total?
 //calculate 8 / 4 = then press a number - it concatenates it to the current display
 //RESOLVED - Issue 3:  8 + 8 = then do + 4......
