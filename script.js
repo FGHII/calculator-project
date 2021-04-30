@@ -87,7 +87,10 @@ buttons.forEach(function(button) {
       console.log(calculationArray);
     }
     if (calculationArray.length == 3 && typeof calculationArray[1] == 'string') {
-      currentDisplayNum = operate(calculationArray[0], calculationArray[1], calculationArray[2])
+      //convert equals output to string since it will be displayed
+      //keeping displayed variables consistently a string for easier manipulation in display
+      //and then converting to numbers when pushed to calculation array
+      currentDisplayNum = operate(calculationArray[0], calculationArray[1], calculationArray[2]).toString()
       calculationArray = [];
       displayValue.dv = currentDisplayNum;
     }
@@ -104,6 +107,6 @@ buttons.forEach(function(button) {
 //Issues
 //Issue 1:  press two operators in a row (same operator and different operators)
 //RESOLVED - Issue 4: calculate 8 x 6 = then press equals a few more times...it repeatedly adds the answer to the array
-//Issue 2:  after pressing equals after a calculation, press a number after that - should it be concatenating to the current total?
-//calculate 8 / 4 = then press a number - it concatenates it to the current display
+//RESOLVED - Issue 2:  after pressing equals after a calculation, press a number after that - should it be concatenating to the current total?
+//calculate 8 / 4 = then press a number - it concatenates it to the current display - accepted functionality/use case
 //RESOLVED - Issue 3:  8 + 8 = then do + 4......
