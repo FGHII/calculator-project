@@ -71,8 +71,8 @@ buttons.forEach(function(button) {
       calculationArray.push(event.target.getAttribute("data-type"));
       console.log(calculationArray);
       displayValue.dv = result; //display current running total/output
-      //if the array doesn't have 3 values yet, add just the operator (should just have 2 values now)
-    } else {
+      //if the array doesn't have 3 values yet and an operator hasn't already been added, add the current displayed value and operator (should just have 2 values now)
+    } else if (typeof calculationArray[1] != 'string') {
     calculationArray.push(parseFloat(currentDisplayNum));
     calculationArray.push(event.target.getAttribute("data-type"));
     console.log(calculationArray);
@@ -105,7 +105,7 @@ buttons.forEach(function(button) {
 });
 
 //Issues
-//Issue 1:  press two operators in a row (same operator and different operators)
+//RESOLVED - Issue 1:  press two operators in a row (same operator and different operators)
 //RESOLVED - Issue 4: calculate 8 x 6 = then press equals a few more times...it repeatedly adds the answer to the array
 //RESOLVED - Issue 2:  after pressing equals after a calculation, press a number after that - should it be concatenating to the current total?
 //calculate 8 / 4 = then press a number - it concatenates it to the current display - accepted functionality/use case
