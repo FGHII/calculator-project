@@ -23,23 +23,23 @@ function operate(a, operator, b) {
 //play with the top 2 answers (getters/setters and proxies) here:
 //https://stackoverflow.com/questions/1759987/listening-for-variable-changes-in-javascript
 const display = document.querySelector(".display");
-displayValue = {
-  dvInternal: 0,
-  dvListener: function(val) {},
-  set dv(val) {
-    this.dvInternal = val;
-    this.dvListener(val);
-  },
-  get dv() {
-    return this.dvInternal;
-  },
-  registerListener: function(listener) {
-    this.dvListener = listener;
-  }
-}
-displayValue.registerListener(function(val) {
-  display.innerText = displayValue.dvInternal;
-});
+// displayValue = {
+//   dvInternal: 0,
+//   dvListener: function(val) {},
+//   set dv(val) {
+//     this.dvInternal = val;
+//     this.dvListener(val);
+//   },
+//   get dv() {
+//     return this.dvInternal;
+//   },
+//   registerListener: function(listener) {
+//     this.dvListener = listener;
+//   }
+// }
+// displayValue.registerListener(function(val) {
+//   display.innerText = displayValue.dvInternal;
+// });
 
 //inputting numbers and functions into display
 buttons = document.querySelectorAll(".button");
@@ -57,7 +57,7 @@ buttons.forEach(function(button) {
         currentDisplayNum = '';
       };
     currentDisplayNum = currentDisplayNum.concat(event.target.innerText);
-    displayValue.dv = currentDisplayNum; //updating display value variable that the listener is checking
+    display.innerText = currentDisplayNum; //updating display value variable that the listener is checking
     //operator button functionality
   } else if (event.target.classList.contains("operator")) {
     //if the calc array already has 3 values, calculate it first then push result and operator to array
@@ -70,14 +70,14 @@ buttons.forEach(function(button) {
       calculationArray.push(result);
       calculationArray.push(event.target.getAttribute("data-type"));
       console.log(calculationArray);
-      displayValue.dv = result; //display current running total/output
+      display.innerText = result; //display current running total/output
       //if the array doesn't have 3 values yet and an operator hasn't already been added, add the current displayed value and operator (should just have 2 values now)
     } else if (typeof calculationArray[1] != 'string') {
     calculationArray.push(parseFloat(currentDisplayNum));
     calculationArray.push(event.target.getAttribute("data-type"));
     console.log(calculationArray);
     currentDisplayNum = ''; //clear displayed number while waiting for next number input
-    displayValue.dv = event.target.innerText; //display current operator
+    display.innerText = event.target.innerText; //display current operator
    }
     //equals button functionality - push current value to array and send to operator
   } else if (event.target.classList.contains("equals")) {
@@ -92,14 +92,14 @@ buttons.forEach(function(button) {
       //and then converting to numbers when pushed to calculation array
       currentDisplayNum = operate(calculationArray[0], calculationArray[1], calculationArray[2]).toString()
       calculationArray = [];
-      displayValue.dv = currentDisplayNum;
+      display.innerText = currentDisplayNum;
     }
     //clear button functionality - initialize working variables and display default zero
   } else if (event.target.classList.contains("clear")) {
     currentDisplayNum = "0";
     calculationArray = [];
     console.log(calculationArray);
-    displayValue.dv = currentDisplayNum;
+    display.innerText = currentDisplayNum;
   }
 });
 });
