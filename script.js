@@ -18,34 +18,12 @@ function operate(a, operator, b) {
     return result;
 };
 
-//initalizing display and setting up listener to update
-//display each time the display value gets changed
-//play with the top 2 answers (getters/setters and proxies) here:
-//https://stackoverflow.com/questions/1759987/listening-for-variable-changes-in-javascript
+//initalizing display and values
 const display = document.querySelector(".display");
-// displayValue = {
-//   dvInternal: 0,
-//   dvListener: function(val) {},
-//   set dv(val) {
-//     this.dvInternal = val;
-//     this.dvListener(val);
-//   },
-//   get dv() {
-//     return this.dvInternal;
-//   },
-//   registerListener: function(listener) {
-//     this.dvListener = listener;
-//   }
-// }
-// displayValue.registerListener(function(val) {
-//   display.innerText = displayValue.dvInternal;
-// });
-
-//inputting numbers and functions into display
-buttons = document.querySelectorAll(".button");
-//initializing values
 let currentDisplayNum = "0"; //zero is default display number after first loadup or pressing clear
 let calculationArray = [];
+//inputting numbers and functions into display
+buttons = document.querySelectorAll(".button");
 //adding event listener to each button
 buttons.forEach(function(button) {
   button.addEventListener("click", function(event) {
@@ -103,10 +81,3 @@ buttons.forEach(function(button) {
   }
 });
 });
-
-//Issues
-//RESOLVED - Issue 1:  press two operators in a row (same operator and different operators)
-//RESOLVED - Issue 4: calculate 8 x 6 = then press equals a few more times...it repeatedly adds the answer to the array
-//RESOLVED - Issue 2:  after pressing equals after a calculation, press a number after that - should it be concatenating to the current total?
-//calculate 8 / 4 = then press a number - it concatenates it to the current display - accepted functionality/use case
-//RESOLVED - Issue 3:  8 + 8 = then do + 4......

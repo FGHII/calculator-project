@@ -1,0 +1,6 @@
+//Issues
+//RESOLVED - Issue 1:  press two operators in a row (same operator and different operators) - current display value and operator keeps pushing to calculation array
+//RESOLVED - Issue 4: calculate 8 x 6 = then press equals a few more times...it repeatedly adds the answer to the array
+//RESOLVED - Issue 2:  after pressing equals after a calculation, press a number after that - should it be concatenating to the current total?
+//calculate 8 / 4 = then press a number - it concatenates it to the current display - accepted functionality/use case
+//RESOLVED - Issue 3:  8 + 8 = then do + 4......
