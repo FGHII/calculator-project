@@ -15,7 +15,7 @@ function operate(a, operator, b) {
       result = a / b;
       break;
   }
-    return result.toFixed(8);
+    return parseFloat(result.toFixed(8));
 };
 
 //initalizing display and values
@@ -64,7 +64,9 @@ buttons.forEach(function(button) {
       calculationArray.push(parseFloat(currentDisplayNum));
       console.log(calculationArray);
     }
-    if (calculationArray.length == 3 && typeof calculationArray[1] == 'string') {
+    if (calculationArray[1] == "divide" && calculationArray[2] == 0) {
+      display.innerText = "Div by 0 is illegal!"
+    } else if (calculationArray.length == 3 && typeof calculationArray[1] == 'string') {
       //convert equals output to string since it will be displayed
       //keeping displayed variables consistently a string for easier manipulation in display
       //and then converting to numbers when pushed to calculation array
