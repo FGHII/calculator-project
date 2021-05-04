@@ -96,8 +96,10 @@ buttons.forEach(function(button) {
     } else if (event.target.classList.contains("equals")) {
       //only push displayed number if an operator string is in the 2nd index position
       if (calculationArray.length < 3 && typeof calculationArray[1] == 'string') {
+        if (currentDisplayNum != '') {
         calculationArray.push(parseFloat(currentDisplayNum));
         console.log(calculationArray);
+      }
       }
       if (calculationArray[1] == "divide" && calculationArray[2] == 0) {
         display.innerText = "Div by 0 is illegal!"
