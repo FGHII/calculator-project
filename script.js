@@ -15,7 +15,7 @@ function operate(a, operator, b) {
       result = a / b;
       break;
   }
-    return result;
+    return result.toFixed(8);
 };
 
 //initalizing display and values
