@@ -29,6 +29,11 @@ buttons.forEach(function(button) {
   button.addEventListener("click", function(event) {
     //number button functionality
     if (event.target.classList.contains("number")) {
+      //checks to see if previous operation was an equals, if so it clears the array and current display variable
+      if (calculationArray.length == 3) {
+        calculationArray = [];
+        currentDisplayNum = '';
+      }
       //if it's a non-zero number, remove the default zero and concatenate it to the current display
       //otherwise if you want to use the default zero as the first value you can
       if (currentDisplayNum == "0") {
@@ -80,7 +85,6 @@ buttons.forEach(function(button) {
         //keeping displayed variables consistently a string for easier manipulation in display
         //and then converting to numbers when pushed to calculation array
         currentDisplayNum = operate(calculationArray[0], calculationArray[1], calculationArray[2]).toString()
-        calculationArray = [];
         display.innerText = currentDisplayNum;
       }
       //clear button functionality - initialize working variables and display default zero
