@@ -37,6 +37,12 @@ buttons.forEach(function(button) {
     currentDisplayNum = currentDisplayNum.concat(event.target.innerText);
     display.innerText = currentDisplayNum; //updating display value variable that the listener is checking
     //operator button functionality
+  } else if (event.target.classList.contains("decimal")) {
+    //prevent multiple decimals
+    if (!currentDisplayNum.includes(".")) {
+      currentDisplayNum = currentDisplayNum.concat(event.target.innerText);
+      display.innerText = currentDisplayNum;
+    }
   } else if (event.target.classList.contains("operator")) {
     //if the calc array already has 3 values, calculate it first then push result and operator to array
     if (calculationArray.length == 3 && typeof calculationArray[1] == 'string') {
