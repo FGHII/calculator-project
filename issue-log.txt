@@ -4,3 +4,6 @@
 //RESOLVED - Issue 2:  after pressing equals after a calculation, press a number after that - should it be concatenating to the current total?
 //calculate 8 / 4 = then press a number - it concatenates it to the current display - accepted functionality/use case
 //RESOLVED - Issue 3:  8 + 8 = then do + 4......
+
+//RESOLVED - Issue 5: 8 + 1 then press an operator again - doesn't calculate the 8 + 1.  can't chain operations together
+//Issue 6:  14 + 4 = then press equals again then press + 4 - it concatenates to the string

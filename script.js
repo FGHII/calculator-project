@@ -50,9 +50,12 @@ buttons.forEach(function(button) {
       }
     } else if (event.target.classList.contains("delete")) {
         currentDisplayNum = currentDisplayNum.slice(0,-1);
+        if (currentDisplayNum == '') {
+          currentDisplayNum = '0'
+        }
         display.innerText = currentDisplayNum;
     } else if (event.target.classList.contains("operator")) {
-      //if the calc array already has 3 values, calculate it first then push result and operator to array
+      //if the calc array already has 3 values (equals button was just pressed), calculate it first then push result and operator to array, display operator
       if (calculationArray.length == 3 && typeof calculationArray[1] == 'string') {
         const result = operate(calculationArray[0], calculationArray[1], calculationArray[2])
         calculationArray = [];
@@ -62,19 +65,33 @@ buttons.forEach(function(button) {
         calculationArray.push(result);
         calculationArray.push(event.target.getAttribute("data-type"));
         console.log(calculationArray);
-        display.innerText = result; //display current running total/output
-        //if the array doesn't have 3 values yet and an operator hasn't already been added, add the current displayed value and operator (should just have 2 values now)
+        display.innerText = event.target.innerText; //display operator
+        //if the array only has 1 number and no operator, add the current displayed value and operator (should just have 2 values now)
       } else if (typeof calculationArray[1] != 'string') {
         calculationArray.push(parseFloat(currentDisplayNum));
         calculationArray.push(event.target.getAttribute("data-type"));
         console.log(calculationArray);
         currentDisplayNum = ''; //clear displayed number while waiting for next number input
         display.innerText = event.target.innerText; //display current operator
+      //if the array has 1 number and an operator, calculate the running total and display the result but still add the operator to the array
+    } else if (calculationArray.length == 2 && typeof calculationArray[1] == 'string') {
+      if (currentDisplayNum != '') { //prevent issue with pressing operator twice in a row
+        calculationArray.push(parseFloat(currentDisplayNum));
+        const result = operate(calculationArray[0], calculationArray[1], calculationArray[2])
+        calculationArray = [];
+        //clear displayed number while waiting for next number input.
+        //we're currently displaying the result so we don't need the default display zero.
+        currentDisplayNum = '';
+        calculationArray.push(result);
+        calculationArray.push(event.target.getAttribute("data-type"));
+        console.log(calculationArray);
+        display.innerText = result;
       }
+    }
       //equals button functionality - push current value to array and send to operator
     } else if (event.target.classList.contains("equals")) {
       //only push displayed number if an operator string is in the 2nd index position
-      if (typeof calculationArray[1] == 'string') {
+      if (calculationArray.length < 3 && typeof calculationArray[1] == 'string') {
         calculationArray.push(parseFloat(currentDisplayNum));
         console.log(calculationArray);
       }

@@ -11,31 +11,34 @@ h1 {
 .calculator-container {
   display: flex;
   flex-direction: column;
-  height: 300px;
-  width: 300px;
+  height: 400px;
+  width: 400px;
   margin: auto;
-  background-color: grey;
+  background-color: #aaaaaa;
   padding: 50px 25px;
+  border-radius: 30px;
+  border: 2px solid black;
 }
 
 .display {
   font-family: "digital-7", sans-serif;
-  font-size: 30px;
+  font-size: 40px;
   letter-spacing: 1px;
   display: flex;
   border: 1px solid black;
   flex: 1 1 0;
+  padding: 10px;
   margin-bottom: 20px;
   justify-content: flex-end;
-  align-items: flex-end;
-  background-color: white;
+  align-items: center;
+  background-color: #eeeeee;
 
 }
 
 .button-container {
   display: flex;
   flex-direction: column;
-  height: 250px;
+  height: 325px;
 }
 
 .row {
@@ -55,12 +58,17 @@ h1 {
   flex: 1 1 0;
   font-weight: bold;
   font-size: 24px;
+  border-radius: 21px;
+}
+
+.number, .equals, .decimal {
+  background-color: #eeeeee;
 }
 
 .clear, .delete {
-  background-color: red;
+  background-color: #ffaaab;
 }
 
 .operator {
-  background-color: orange;
+  background-color: #ffd4aa;
 }
