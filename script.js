@@ -53,6 +53,10 @@ buttons.forEach(function(button) {
         if (currentDisplayNum == '') {
           currentDisplayNum = '0'
         }
+        //if equals button was pressed, will delete from result and allow you to calculate with the edited number
+        if (calculationArray.length == 3) {
+          calculationArray = [];
+        }
         display.innerText = currentDisplayNum;
     } else if (event.target.classList.contains("operator")) {
       //if the calc array already has 3 values (equals button was just pressed), calculate it first then push result and operator to array, display operator
