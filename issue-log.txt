@@ -9,3 +9,5 @@
 //RESOLVED - Issue 6:  14 + 4 = then press equals again then press + 4 - it concatenates to the string
 //RESOLVED - Issue 7: 5 + 6 = then press delete, then + 5....it calculates the using the number before the delete key was pressed
 //RESOLVED - Issue 8: 5 + 7 + then press equals
+
+//Issue 9:  102 - 120 (negative number) then try to enter a decimal after it

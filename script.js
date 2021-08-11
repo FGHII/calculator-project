@@ -68,8 +68,8 @@ buttons.forEach(function(button) {
       if (calculationArray.length == 3 && typeof calculationArray[1] == 'string') {
         const result = operate(calculationArray[0], calculationArray[1], calculationArray[2])
         calculationArray = [];
-        //clear displayed number while waiting for next number input.
-        //we're currently displaying the operator so we don't need the default display zero.
+        /*clear displayed number while waiting for next number input.
+        we're currently displaying the operator so we don't need the default display zero. */
         currentDisplayNum = '';
         calculationArray.push(result);
         calculationArray.push(event.target.getAttribute("data-type"));
@@ -88,8 +88,8 @@ buttons.forEach(function(button) {
         calculationArray.push(parseFloat(currentDisplayNum));
         const result = operate(calculationArray[0], calculationArray[1], calculationArray[2])
         calculationArray = [];
-        //clear displayed number while waiting for next number input.
-        //we're currently displaying the result so we don't need the default display zero.
+        /* clear displayed number while waiting for next number input.
+        we're currently displaying the result so we don't need the default display zero */
         currentDisplayNum = '';
         calculationArray.push(result);
         calculationArray.push(event.target.getAttribute("data-type"));
@@ -111,9 +111,9 @@ buttons.forEach(function(button) {
         alert("Dividing by zero is illegal!");
         calculationArray = [];
       } else if (calculationArray.length == 3 && typeof calculationArray[1] == 'string') {
-        //convert equals output to string since it will be displayed
-        //keeping displayed variables consistently a string for easier manipulation in display
-        //and then converting to numbers when pushed to calculation array
+        /* convert equals output to string since it will be displayed
+        keeping displayed variables consistently a string for easier manipulation in display
+        and then converting to numbers when pushed to calculation array */
         currentDisplayNum = operate(calculationArray[0], calculationArray[1], calculationArray[2]).toString()
         display.innerText = currentDisplayNum;
       }
